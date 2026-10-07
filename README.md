@@ -1,2 +1,2 @@
-### Universidad Autónoma Metropolitana Azcapotzalco
-### Métodos Numéricos (115039) 26 O
+## Autonomous Metropolitan University, Azcapotzalco.
+## Numerical Methods (115039). Quarter 26-O.
