@@ -31,7 +31,7 @@ int main(void)
     double aprox = 0.0, anterior, termino = 1.0, ea, et;
     int n = 0;
 
-    printf("Práctica 1 · Serie de Maclaurin de e^x · C\n");
+    printf("Practica 1 · Serie de Maclaurin de e^x · C\n");
     printf("x = %g, %d cifras significativas: es = %g %% (criterio de Scarborough)\n",
            X, CIFRAS, es);
     printf("Valor verdadero: exp(%g) = %.15f\n\n", X, verdadero);
@@ -42,9 +42,9 @@ int main(void)
         aprox = aprox + termino;
         n = n + 1;
         /* COMPLETAR 1: el término siguiente, x^n / n!, a partir del anterior. */
-        termino = 0.0;   /* <- sustituya 0.0 por la expresión correcta */
+        termino = termino * X/n;   /* <- sustituya 0.0 por la expresión correcta */
         /* COMPLETAR 2: el error relativo aproximado, en %. Ojo: fabs, no abs. */
-        ea = 0.0;   /* <- sustituya 0.0 por la expresión correcta */
+        ea = fabs((aprox - anterior)/aprox) * 100;   /* <- sustituya 0.0 por la expresión correcta */
         et = fabs((verdadero - aprox) / verdadero) * 100.0;
         if (n == 1)
             printf("%8d %20.15f %13.6g %13s\n", n, aprox, et, "-");
