@@ -69,7 +69,7 @@ typedef struct {
 static double error_aprox(double nuevo, double anterior)
 {
     /* COMPLETAR 1. Ojo: en C, abs() es para enteros; para double se usa fabs(). */
-    return 0.0;   /* <- sustituya 0.0 por la expresión correcta */
+    return fabs((nuevo - anterior)/ nuevo) * 100;   /* <- sustituya 0.0 por la expresión correcta */
 }
 
 static void fila_cerrado(int k, double a, double b, double x, double ea, int con_ea)
@@ -128,7 +128,7 @@ static Resultado falsa_posicion(double a, double b)
     printf("%s\n", ENC_CERRADO);
     for (int k = 1; k <= NMAX; ++k) {
         /* COMPLETAR 2: el punto donde la recta corta el eje x. */
-        x = 0.0;   /* <- sustituya 0.0 por la expresión correcta */
+        x = b - f(b) * (a - b) / (f(a) - f(b));   /* <- sustituya 0.0 por la expresión correcta */
         if (k > 1) ea = error_aprox(x, x_ant);
         fila_cerrado(k, a, b, x, ea, k > 1);
         r.x = x; r.ea = ea; r.k = k;
@@ -152,7 +152,7 @@ static Resultado punto_fijo(double x)
     fila_abierto(0, x, 0.0, 0);
     for (int k = 1; k <= NMAX; ++k) {
         /* COMPLETAR 3: la siguiente aproximación. */
-        x_nuevo = 0.0;   /* <- sustituya 0.0 por la expresión correcta */
+        x_nuevo = g(x);   /* <- sustituya 0.0 por la expresión correcta */
         ea = error_aprox(x_nuevo, x);
         x = x_nuevo;
         fila_abierto(k, x, ea, 1);
@@ -174,7 +174,7 @@ static Resultado newton(double x)
     fila_abierto(0, x, 0.0, 0);
     for (int k = 1; k <= NMAX; ++k) {
         /* COMPLETAR 4: la fórmula de Newton-Raphson, con f y fp. */
-        x_nuevo = 0.0;   /* <- sustituya 0.0 por la expresión correcta */
+        x_nuevo =  x - f(x) / fp(x);   /* <- sustituya 0.0 por la expresión correcta */
         ea = error_aprox(x_nuevo, x);
         x = x_nuevo;
         fila_abierto(k, x, ea, 1);
@@ -196,7 +196,7 @@ static Resultado secante_modificada(double x, double delta)
     fila_abierto(0, x, 0.0, 0);
     for (int k = 1; k <= NMAX; ++k) {
         /* COMPLETAR 5: la pendiente es (f(x + delta) - f(x)) / delta. */
-        x_nuevo = 0.0;   /* <- sustituya 0.0 por la expresión correcta */
+        x_nuevo =  x - delta * f(x) / (f(x + delta) - f(x));   /* <- sustituya 0.0 por la expresión correcta */
         ea = error_aprox(x_nuevo, x);
         x = x_nuevo;
         fila_abierto(k, x, ea, 1);

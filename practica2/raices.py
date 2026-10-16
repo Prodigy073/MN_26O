@@ -32,7 +32,7 @@ DESCR_G = "g(c) = g m / v (1 - exp(-c t / m))"
 GRAV = 9.8          # gravedad, m/s²
 MASA = 68.1         # masa del paracaidista, kg
 TIEMPO = 10.0       # tiempo de caída, s
-VEL = 42.0          # velocidad medida, m/s
+VEL = 40.0          # velocidad medida, m/s
 
 A, B = 12.0, 16.0   # intervalo de los métodos cerrados
 X0 = 12.5           # inicio de los métodos abiertos
