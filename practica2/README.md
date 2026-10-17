@@ -39,7 +39,7 @@ x_nuevo =  x - delta * f(x) / (f(x + delta) - f(x));
 ![Ejecución en C](img/04-c-ejecucion.png)
 
 ¿Coinciden las tablas de C con las de Octave y Python? Sí / No, y en qué.
-
+Si, coinciden. Principalmente en el calculo de las raíces en los 5 métodos utilizados.
 ## 3. Las gráficas de Python
 
 ![Función](img/funcion.png)
