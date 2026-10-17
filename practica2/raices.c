@@ -17,39 +17,38 @@
 #include <stdio.h>
 
 /* ======================== BLOQUE DEL PROBLEMA ======================== */
-/* Es lo único que se cambia para resolver otra ecuación (ejercicio 4).  */
+/* Ecuación 22 · Mecánica · Mecanismo de cuatro barras: ángulo del balancín (Freudenstein) */
 
-#define DESCRIPCION "f(c) = g m / c (1 - exp(-c t / m)) - v,  g = 9.8, m = 68.1, t = 10, v = 40"
-#define DESCR_G     "g(c) = g m / v (1 - exp(-c t / m))"
+#define DESCRIPCION "f(t4) = d/a cos(t4) - d/c cos(t2) + (a^2 - b^2 + c^2 + d^2)/(2 a c) - cos(t2 - t4),  a = 40, b = 120, c = 80, d = 100, t2 = 60 grados"
+#define DESCR_G     "g(t4) = t4 + f(t4) / 2"
 
-static const double GRAV   = 9.8;    /* gravedad, m/s^2                    */
-static const double MASA   = 68.1;   /* masa del paracaidista, kg          */
-static const double TIEMPO = 10.0;   /* tiempo de caída, s                 */
-static const double VEL    = 40.0;   /* velocidad medida, m/s              */
+static const double LA = 40.0;   /* manivela, mm */
+static const double LB = 120.0;   /* acoplador, mm */
+static const double LC = 80.0;   /* balancín, mm */
+static const double LD = 100.0;   /* bancada, mm */
+static const double TH2 = 1.0471975511965976;   /* ángulo de la manivela, rad (60 grados) */
 
-static const double A = 12.0, B = 16.0;  /* intervalo de los métodos cerrados */
-static const double X0    = 12.5;        /* inicio de los métodos abiertos    */
-static const double DELTA = 0.05;        /* incremento de la secante modificada */
+static const double A = 0.5, B = 1.5;  /* intervalo de los métodos cerrados */
+static const double X0    = 1.0;        /* inicio de los métodos abiertos    */
+static const double DELTA = 0.01;        /* incremento de la secante modificada */
 static const double TOL   = 0.5;         /* tolerancia: ea en %               */
 #define NMAX 50                          /* máximo de iteraciones             */
 
-/* La función cuya raíz se busca: el coeficiente de arrastre c, en kg/s. */
-static double f(double c)
+static double f(double x)
 {
-    return GRAV * MASA / c * (1.0 - exp(-c * TIEMPO / MASA)) - VEL;
+    return LD/LA*cos(x) - LD/LC*cos(TH2) + (LA*LA - LB*LB + LC*LC + LD*LD)/(2*LA*LC) - cos(TH2 - x);
 }
 
 /* Su derivada, para Newton-Raphson. */
-static double fp(double c)
+static double fp(double x)
 {
-    return GRAV * MASA / c * (TIEMPO / MASA) * exp(-c * TIEMPO / MASA)
-         - GRAV * MASA / (c * c) * (1.0 - exp(-c * TIEMPO / MASA));
+    return -LD/LA*sin(x) - sin(TH2 - x);
 }
 
-/* Despeje x = g(x) para punto fijo: c = g m / v (1 - exp(-c t / m)). */
-static double g(double c)
+/* Despeje x = g(x) para punto fijo. */
+static double g(double x)
 {
-    return GRAV * MASA / VEL * (1.0 - exp(-c * TIEMPO / MASA));
+    return x + f(x)/2;
 }
 
 /* ===================================================================== */

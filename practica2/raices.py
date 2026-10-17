@@ -23,40 +23,40 @@ import matplotlib.pyplot as plt
 from scipy.optimize import brentq
 
 # ======================== BLOQUE DEL PROBLEMA ========================
-# Es lo único que se cambia para resolver otra ecuación (ejercicio 4).
+# Ecuación 22 · Mecánica · Mecanismo de cuatro barras: ángulo del balancín (Freudenstein)
 
-DESCRIPCION = ("f(c) = g m / c (1 - exp(-c t / m)) - v,  "
-               "g = 9.8, m = 68.1, t = 10, v = 40")
-DESCR_G = "g(c) = g m / v (1 - exp(-c t / m))"
+DESCRIPCION = 'f(t4) = d/a cos(t4) - d/c cos(t2) + (a^2 - b^2 + c^2 + d^2)/(2 a c) - cos(t2 - t4),  a = 40, b = 120, c = 80, d = 100, t2 = 60 grados'
+DESCR_G = 'g(t4) = t4 + f(t4) / 2'
 
-GRAV = 9.8          # gravedad, m/s²
-MASA = 68.1         # masa del paracaidista, kg
-TIEMPO = 10.0       # tiempo de caída, s
-VEL = 40.0          # velocidad medida, m/s
+LA = 40.0   # manivela, mm
+LB = 120.0   # acoplador, mm
+LC = 80.0   # balancín, mm
+LD = 100.0   # bancada, mm
+TH2 = 1.0471975511965976   # ángulo de la manivela, rad (60 grados)
 
-A, B = 12.0, 16.0   # intervalo de los métodos cerrados
-X0 = 12.5           # inicio de los métodos abiertos
-DELTA = 0.05        # incremento de la secante modificada
+A, B = 0.5, 1.5   # intervalo de los métodos cerrados
+X0 = 1.0         # inicio de los métodos abiertos
+DELTA = 0.01      # incremento de la secante modificada
 TOL = 0.5           # tolerancia: ea en %
 NMAX = 50           # máximo de iteraciones
 
 
-def f(c):
-    """La función cuya raíz se busca: el coeficiente de arrastre c, en kg/s."""
-    return GRAV * MASA / c * (1.0 - math.exp(-c * TIEMPO / MASA)) - VEL
+def f(x):
+    """La función cuya raíz se busca."""
+    return LD/LA*math.cos(x) - LD/LC*math.cos(TH2) + (LA*LA - LB*LB + LC*LC + LD*LD)/(2*LA*LC) - math.cos(TH2 - x)
 
 
-def fp(c):
+def fp(x):
     """Su derivada, para Newton-Raphson."""
-    return (GRAV * MASA / c * (TIEMPO / MASA) * math.exp(-c * TIEMPO / MASA)
-            - GRAV * MASA / (c * c) * (1.0 - math.exp(-c * TIEMPO / MASA)))
+    return -LD/LA*math.sin(x) - math.sin(TH2 - x)
 
 
-def g(c):
-    """Despeje x = g(x) para punto fijo: c = g m / v (1 - exp(-c t / m))."""
-    return GRAV * MASA / VEL * (1.0 - math.exp(-c * TIEMPO / MASA))
+def g(x):
+    """Despeje x = g(x) para punto fijo."""
+    return x + f(x)/2
 
-# =====================================================================
+# ====================================================================
+
 
 ENC_CERRADO = "   k             a             b             x            f(x)     ea (%)"
 ENC_ABIERTO = "   k             x            f(x)     ea (%)"
