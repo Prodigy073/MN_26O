@@ -6,9 +6,9 @@
 | | |
 |---|---|
 | Equipo | |
-| Integrantes (nombre, matrícula y licenciatura) | |
-| Ecuación asignada | Número y problema |
-| Fecha | |
+| Integrantes (Fernandez Gonzalez Juan José, 2223036835, Ing. Mecánica) | |
+| Ecuación asignada | 22 · Mecanismo de cuatro barras: ángulo del balancín (Freudenstein) |
+| Fecha |16 de octubre de 2026 |
 
 ---
 
