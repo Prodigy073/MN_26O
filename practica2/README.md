@@ -24,10 +24,15 @@ coinciden con las de las láminas de la unidad II.
 
 ```c
 /* COMPLETAR 1 */
+return fabs((nuevo - anterior)/ nuevo) * 100;
 /* COMPLETAR 2 */
+x = b - f(b) * (a - b) / (f(a) - f(b));
 /* COMPLETAR 3 */
+x_nuevo = g(x);
 /* COMPLETAR 4 */
+x_nuevo =  x - f(x) / fp(x);
 /* COMPLETAR 5 */
+x_nuevo =  x - delta * f(x) / (f(x + delta) - f(x));
 ```
 
 ![Compilación](img/03-c-compilacion.png)
