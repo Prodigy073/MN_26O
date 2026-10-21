@@ -1,0 +1,15 @@
+# Práctica 3 · UEA 1151039 · 26-O
+services:
+  metodos:
+    build: .
+    image: metodos-1151039:26o
+    container_name: metodos_practica3
+    volumes:
+      - ./:/trabajo
+    working_dir: /trabajo
+    stdin_open: true
+    tty: true
+    environment:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MPLBACKEND: "Agg"
