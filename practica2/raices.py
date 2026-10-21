@@ -28,11 +28,18 @@ from scipy.optimize import brentq
 DESCRIPCION = 'f(t4) = d/a cos(t4) - d/c cos(t2) + (a^2 - b^2 + c^2 + d^2)/(2 a c) - cos(t2 - t4),  a = 40, b = 120, c = 80, d = 100, t2 = 60 grados'
 DESCR_G = 'g(t4) = t4 + f(t4) / 2'
 
+<<<<<<< Updated upstream
 LA = 40.0   # manivela, mm
 LB = 120.0   # acoplador, mm
 LC = 80.0   # balancín, mm
 LD = 100.0   # bancada, mm
 TH2 = 1.0471975511965976   # ángulo de la manivela, rad (60 grados)
+=======
+GRAV = 9.8          # gravedad, m/s²
+MASA = 68.1         # masa del paracaidista, kg
+TIEMPO = 10.0       # tiempo de caída, s
+VEL = 44.0          # velocidad medida, m/s
+>>>>>>> Stashed changes
 
 A, B = 0.5, 1.5   # intervalo de los métodos cerrados
 X0 = 1.0         # inicio de los métodos abiertos
